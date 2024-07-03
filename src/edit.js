@@ -51,12 +51,12 @@ import { isValidURL } from './utils';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { width, height, url } = attributes;
+	const { width, height, url, fullWidth } = attributes;
 
-	const [ showZoom, setShowZoom ] = useState(true);
-	const [ showGeolocation, setShowGeolocation ] = useState(true);
-	const [ showFullscreen, setShowFullscreen ] = useState(true);
-	const [ showBasemapSelector, setShowBasemapSelector ] = useState(true);
+	const [ showZoom, setShowZoom ] = useState(false);
+	const [ showGeolocation, setShowGeolocation ] = useState(false);
+	const [ showFullscreen, setShowFullscreen ] = useState(false);
+	const [ showBasemapSelector, setShowBasemapSelector ] = useState(false);
 	const [ validURL, setValidURL ] = useState(isValidURL(url));
 
 	/**
@@ -180,28 +180,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 
-					<TextControl
-						label={ __(
-							'Width',
-							'wordpress-map-embed'
-						) }
-						value={ width }
-						onChange={ ( value ) =>
-							setAttributes( { width: value } )
-						}
-					/>
-
-					<TextControl
-						label={ __(
-							'Height',
-							'wordpress-map-embed'
-						) }
-						value={ height }
-						onChange={ ( value ) =>
-							setAttributes( { height: value } )
-						}
-					/>
-
 					<ToggleControl
 						label={ __(
 							'Show Zoom',
@@ -237,6 +215,38 @@ export default function Edit( { attributes, setAttributes } ) {
 						checked={ showBasemapSelector }
 						onChange={ ( value ) => setShowBasemapSelector(value) }
 					/>
+
+					<ToggleControl
+						label={ __(
+							'Full Width',
+							'wordpress-map-embed'
+						) }
+						checked={ fullWidth }
+						onChange={ ( value ) => setAttributes( { fullWidth: value } ) }
+					/>
+
+					<TextControl
+						label={ __(
+							'Width',
+							'wordpress-map-embed'
+						) }
+						disabled={ fullWidth }
+						value={ fullWidth ? "100%" : width }
+						onChange={ ( value ) =>
+							setAttributes( { width: value } )
+						}
+					/>
+
+					<TextControl
+						label={ __(
+							'Height',
+							'wordpress-map-embed'
+						) }
+						value={ height }
+						onChange={ ( value ) =>
+							setAttributes( { height: value } )
+						}
+					/>
 					
 				</PanelBody>
 			</InspectorControls>
@@ -254,7 +264,13 @@ export default function Edit( { attributes, setAttributes } ) {
 		}
 
 		return (
-			<iframe width={ width } height={ height } style={ { border: 0 } } src={ url }></iframe>
+			<iframe 
+				width={ fullWidth ? "100%" : width } 
+				height={ height } 
+				style={ { border: 0 } } 
+				src={ url }>
+
+			</iframe>
 		);
 	};
 
