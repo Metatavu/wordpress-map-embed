@@ -1,48 +1,11 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
-
-/**
- * Imports the InspectorControls component, which is used to wrap
- * the block's custom controls that will appear in in the Settings
- * Sidebar when the block is selected.
- *
- * Also imports the React hook that is used to mark the block wrapper
- * element. It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#inspectorcontrols
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Imports the necessary components that will be used to create
- * the user interface for the block's settings.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/components/panel/#panelbody
- * @see https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
- * @see https://developer.wordpress.org/block-editor/reference-guides/components/toggle-control/
- */
 import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
-
-/**
- * Imports the useEffect React Hook. This is used to set an attribute when the
- * block is loaded in the Editor.
- *
- * @see https://react.dev/reference/react/useEffect
- */
 import { useEffect, useState } from 'react';
-
-import { isValidURL } from './utils'; 
+import { isValidURL } from './utils';
 
 /**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
+ * The edit function for the WordPress Map Embed block.
  *
  * @param {Object}   props               Properties passed to the function.
  * @param {Object}   props.attributes    Available block attributes.
@@ -53,41 +16,41 @@ import { isValidURL } from './utils';
 export default function Edit( { attributes, setAttributes } ) {
 	const { width, height, url, fullWidth } = attributes;
 
-	const [ showZoom, setShowZoom ] = useState(false);
-	const [ showGeolocation, setShowGeolocation ] = useState(false);
-	const [ showFullscreen, setShowFullscreen ] = useState(false);
-	const [ showBasemapSelector, setShowBasemapSelector ] = useState(false);
-	const [ validURL, setValidURL ] = useState(isValidURL(url));
+	const [ showZoom, setShowZoom ] = useState( false );
+	const [ showGeolocation, setShowGeolocation ] = useState( false );
+	const [ showFullscreen, setShowFullscreen ] = useState( false );
+	const [ showBasemapSelector, setShowBasemapSelector ] = useState( false );
+	const [ validURL, setValidURL ] = useState( isValidURL( url ) );
 
 	/**
 	 * Creates embed iframe code
-	 * 
+	 *
 	 * @returns {string} embed iframe code
 	 */
 	const createEmbedCode = () => {
 		const attributes = [];
 
-		attributes.push('width="' + width.replace(/px$/, "") + '"');
-		attributes.push('height="' + height.replace(/px$/, "") + '"');
-		attributes.push('style="border:0"');
-		attributes.push('frameborder="0"');
-		attributes.push('src="' + url + '"');
+		attributes.push( 'width="' + width.replace( /px$/, '' ) + '"' );
+		attributes.push( 'height="' + height.replace( /px$/, '' ) + '"' );
+		attributes.push( 'style="border:0"' );
+		attributes.push( 'frameborder="0"' );
+		attributes.push( 'src="' + url + '"' );
 
-		return '<iframe ' + attributes.join(' ') + '></iframe>';
+		return '<iframe ' + attributes.join( ' ' ) + '></iframe>';
 	};
 
 	/**
 	 * Parses embed code and sets attributes based on the code
-	 * 
+	 *
 	 * @param {string} embedCode
 	 */
-	const parseEmbedCode = (embedCode) => {
+	const parseEmbedCode = ( embedCode ) => {
 		const parser = new DOMParser();
-		const doc = parser.parseFromString(embedCode, 'text/html');
-		const iframe = doc.querySelector('iframe');
-		const url = iframe.getAttribute('src');
-		const width = iframe.getAttribute('width');
-		const height = iframe.getAttribute('height');
+		const doc = parser.parseFromString( embedCode, 'text/html' );
+		const iframe = doc.querySelector( 'iframe' );
+		const url = iframe.getAttribute( 'src' );
+		const width = iframe.getAttribute( 'width' );
+		const height = iframe.getAttribute( 'height' );
 
 		setAttributes( { url, width, height } );
 	};
@@ -95,85 +58,78 @@ export default function Edit( { attributes, setAttributes } ) {
 	/**
 	 * Parses URL and sets UI attributes based on the URL
 	 */
-	useEffect(() => {
-		if (isValidURL(url)) {
-			const urlParams = new URLSearchParams(url);
-			const ui = urlParams.get('ui');
-			const uiArray = (ui || "").split('!');
+	useEffect( () => {
+		if ( isValidURL( url ) ) {
+			const urlParams = new URLSearchParams( url );
+			const ui = urlParams.get( 'ui' );
+			const uiArray = ( ui || '' ).split( '!' );
 
-			setShowZoom(uiArray.includes('z'));
-			setShowGeolocation(uiArray.includes('g'));
-			setShowFullscreen(uiArray.includes('o'));
-			setShowBasemapSelector(uiArray.includes('b'));
-			setValidURL(true);
+			setShowZoom( uiArray.includes( 'z' ) );
+			setShowGeolocation( uiArray.includes( 'g' ) );
+			setShowFullscreen( uiArray.includes( 'o' ) );
+			setShowBasemapSelector( uiArray.includes( 'b' ) );
+			setValidURL( true );
 		} else {
-			setValidURL(false);
+			setValidURL( false );
 		}
-	}, [ url ]);
+	}, [ url ] );
 
 	/**
 	 * Updates UI parameters into the URL
-	 * 
+	 *
 	 * In the URL, the UI parameter is a string that contains the following characters:
-	 * 
+	 *
 	 * z == showzoom
 	 * g == showgeolocation
 	 * o == showfullscreen
 	 * b == showbasemapselector
-   */
-	useEffect(() => {
+	 */
+	useEffect( () => {
 		try {
-			const updatedURL = new URL(url);
+			const updatedURL = new URL( url );
 			const uiArray = [];
 
-			if (showZoom) {
-				uiArray.push('z');
-			}
-			
-			if (showGeolocation) {
-				uiArray.push('g');
-			}
-			
-			if (showFullscreen) {
-				uiArray.push('o');
+			if ( showZoom ) {
+				uiArray.push( 'z' );
 			}
 
-			if (showBasemapSelector) {
-				uiArray.push('b');
+			if ( showGeolocation ) {
+				uiArray.push( 'g' );
 			}
 
-			updatedURL.searchParams.set('ui', uiArray.join('!'));
+			if ( showFullscreen ) {
+				uiArray.push( 'o' );
+			}
+
+			if ( showBasemapSelector ) {
+				uiArray.push( 'b' );
+			}
+
+			updatedURL.searchParams.set( 'ui', uiArray.join( '!' ) );
 
 			setAttributes( { url: updatedURL.toString() } );
-		} catch (error) {
-			console.error(error);
+		} catch ( error ) {
+			console.error( error );
 		}
-	}, [ showZoom, showGeolocation, showFullscreen, showBasemapSelector ]);
+	}, [ showZoom, showGeolocation, showFullscreen, showBasemapSelector ] );
 
 	/**
 	 * Renders the InspectorControls element
-	 * 
+	 *
 	 * @returns {Element} The InspectorControls element
 	 */
 	const renderInspectorControls = () => {
 		return (
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings', 'wordpress-map-embed' ) }>
-
 					<TextControl
-						label={ __(
-							'Embed code',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Embed code', 'wordpress-map-embed' ) }
 						value={ createEmbedCode() }
-						onChange={ ( value ) => parseEmbedCode(value) }
+						onChange={ ( value ) => parseEmbedCode( value ) }
 					/>
 
 					<TextControl
-						label={ __(
-							'URL',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'URL', 'wordpress-map-embed' ) }
 						value={ url }
 						onChange={ ( value ) =>
 							setAttributes( { url: value } )
@@ -181,12 +137,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 
 					<ToggleControl
-						label={ __(
-							'Show Zoom',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Show Zoom', 'wordpress-map-embed' ) }
 						checked={ showZoom }
-						onChange={ ( value ) => setShowZoom(value) }
+						onChange={ ( value ) => setShowZoom( value ) }
 					/>
 
 					<ToggleControl
@@ -195,16 +148,13 @@ export default function Edit( { attributes, setAttributes } ) {
 							'wordpress-map-embed'
 						) }
 						checked={ showGeolocation }
-						onChange={ ( value ) => setShowGeolocation(value) }
+						onChange={ ( value ) => setShowGeolocation( value ) }
 					/>
 
 					<ToggleControl
-						label={ __(
-							'Show Fullscreen',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Show Fullscreen', 'wordpress-map-embed' ) }
 						checked={ showFullscreen }
-						onChange={ ( value ) => setShowFullscreen(value) }
+						onChange={ ( value ) => setShowFullscreen( value ) }
 					/>
 
 					<ToggleControl
@@ -213,41 +163,35 @@ export default function Edit( { attributes, setAttributes } ) {
 							'wordpress-map-embed'
 						) }
 						checked={ showBasemapSelector }
-						onChange={ ( value ) => setShowBasemapSelector(value) }
+						onChange={ ( value ) =>
+							setShowBasemapSelector( value )
+						}
 					/>
 
 					<ToggleControl
-						label={ __(
-							'Full Width',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Full Width', 'wordpress-map-embed' ) }
 						checked={ fullWidth }
-						onChange={ ( value ) => setAttributes( { fullWidth: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { fullWidth: value } )
+						}
 					/>
 
 					<TextControl
-						label={ __(
-							'Width',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Width', 'wordpress-map-embed' ) }
 						disabled={ fullWidth }
-						value={ fullWidth ? "100%" : width }
+						value={ fullWidth ? '100%' : width }
 						onChange={ ( value ) =>
 							setAttributes( { width: value } )
 						}
 					/>
 
 					<TextControl
-						label={ __(
-							'Height',
-							'wordpress-map-embed'
-						) }
+						label={ __( 'Height', 'wordpress-map-embed' ) }
 						value={ height }
 						onChange={ ( value ) =>
 							setAttributes( { height: value } )
 						}
 					/>
-					
 				</PanelBody>
 			</InspectorControls>
 		);
@@ -255,35 +199,38 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	/**
 	 * Renders the embed iframe
-	 * 
+	 *
 	 * @returns {Element} The embed iframe
 	 */
 	const renderEmbed = () => {
-		if (!validURL) {
+		if ( ! validURL ) {
 			return <div>Invalid URL</div>;
 		}
 
 		return (
-			<iframe 
-				width={ fullWidth ? "100%" : width } 
-				height={ height } 
-				style={ { border: 0 } } 
-				src={ url }>
-
-			</iframe>
+			<iframe
+				width={ fullWidth ? '100%' : width }
+				height={ height }
+				style={ { border: 0 } }
+				src={ url }
+			></iframe>
 		);
 	};
 
 	return (
 		<>
 			{ renderInspectorControls() }
-			<p 
-				{ ...useBlockProps() }> 
-				<div style={{
-					background: "#eee",
-					textAlign: "center"
-				}}>
-					{ __( 'Embedded Map (click here to edit)', 'wordpress-map-embed' ) }
+			<p { ...useBlockProps() }>
+				<div
+					style={ {
+						background: '#eee',
+						textAlign: 'center',
+					} }
+				>
+					{ __(
+						'Embedded Map (click here to edit)',
+						'wordpress-map-embed'
+					) }
 				</div>
 				{ renderEmbed() }
 			</p>
