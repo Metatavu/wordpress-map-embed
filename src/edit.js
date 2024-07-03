@@ -25,18 +25,18 @@ export default function Edit( { attributes, setAttributes } ) {
 	/**
 	 * Creates embed iframe code
 	 *
-	 * @returns {string} embed iframe code
+	 * @return {string} embed iframe code
 	 */
 	const createEmbedCode = () => {
-		const attributes = [];
+		const attrs = [];
 
-		attributes.push( 'width="' + width.replace( /px$/, '' ) + '"' );
-		attributes.push( 'height="' + height.replace( /px$/, '' ) + '"' );
-		attributes.push( 'style="border:0"' );
-		attributes.push( 'frameborder="0"' );
-		attributes.push( 'src="' + url + '"' );
+		attrs.push( 'width="' + width.replace( /px$/, '' ) + '"' );
+		attrs.push( 'height="' + height.replace( /px$/, '' ) + '"' );
+		attrs.push( 'style="border:0"' );
+		attrs.push( 'frameborder="0"' );
+		attrs.push( 'src="' + url + '"' );
 
-		return '<iframe ' + attributes.join( ' ' ) + '></iframe>';
+		return '<iframe ' + attrs.join( ' ' ) + '></iframe>';
 	};
 
 	/**
@@ -48,11 +48,15 @@ export default function Edit( { attributes, setAttributes } ) {
 		const parser = new DOMParser();
 		const doc = parser.parseFromString( embedCode, 'text/html' );
 		const iframe = doc.querySelector( 'iframe' );
-		const url = iframe.getAttribute( 'src' );
-		const width = iframe.getAttribute( 'width' );
-		const height = iframe.getAttribute( 'height' );
+		const parsedUrl = iframe.getAttribute( 'src' );
+		const parsedWidth = iframe.getAttribute( 'width' );
+		const parsedHeight = iframe.getAttribute( 'height' );
 
-		setAttributes( { url, width, height } );
+		setAttributes( {
+			url: parsedUrl,
+			width: parsedWidth,
+			height: parsedHeight,
+		} );
 	};
 
 	/**
@@ -108,15 +112,20 @@ export default function Edit( { attributes, setAttributes } ) {
 			updatedURL.searchParams.set( 'ui', uiArray.join( '!' ) );
 
 			setAttributes( { url: updatedURL.toString() } );
-		} catch ( error ) {
-			console.error( error );
-		}
-	}, [ showZoom, showGeolocation, showFullscreen, showBasemapSelector ] );
+		} catch ( error ) {}
+	}, [
+		showZoom,
+		showGeolocation,
+		showFullscreen,
+		showBasemapSelector,
+		setAttributes,
+		url,
+	] );
 
 	/**
 	 * Renders the InspectorControls element
 	 *
-	 * @returns {Element} The InspectorControls element
+	 * @return {Element} The InspectorControls element
 	 */
 	const renderInspectorControls = () => {
 		return (
@@ -200,7 +209,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	/**
 	 * Renders the embed iframe
 	 *
-	 * @returns {Element} The embed iframe
+	 * @return {Element} The embed iframe
 	 */
 	const renderEmbed = () => {
 		if ( ! validURL ) {
@@ -209,6 +218,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 		return (
 			<iframe
+				title="Embedded Map"
 				width={ fullWidth ? '100%' : width }
 				height={ height }
 				style={ { border: 0 } }
