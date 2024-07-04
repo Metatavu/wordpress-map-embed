@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       Wordpress Map Embed
- * Description:       Map embed component for Wordpress Gutenberg editor.
+ * Plugin Name:       Map Embed
+ * Description:       Map embed component.
  * Version:           1.0.0
  * Requires at least: 6.2
  * Requires PHP:      7.0
@@ -15,17 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function create_block_wordpress_map_embed_init() {
-	register_block_type( __DIR__ . '/build' );
-}
+add_action('plugins_loaded', function () {
+	load_plugin_textdomain( 'wordpress-map-embed', false, basename(dirname( __FILE__ ) ) . '/languages');
+});
 
-add_action( 'init', 'create_block_wordpress_map_embed_init' );
-
-add_filter( 'load_script_translation_file', 'wordpress_map_embed_fix_translation_location', 10, 3 );
-function wordpress_map_embed_fix_translation_location( string $file, string $handle, string $domain ): string {
+add_filter('load_script_translation_file', function (string $file, string $handle, string $domain ) {
 	if ( strpos( $handle, 'block-wordpress-map-embed-editor-script' ) !== false && 'wordpress-map-embed' === $domain ) {
 		$file = str_replace( WP_LANG_DIR . '/plugins', plugin_dir_path( __FILE__ ) . 'languages', $file );
 	}
 
 	return $file;
-}
+}, 10, 3 );
+
+add_action('init', function () {
+	register_block_type( __DIR__ . '/build', [
+		'title' => __('Map Embed', 'wordpress-map-embed' ),
+		'description' => __('Map embed component.', 'wordpress-map-embed' )
+	]);
+});

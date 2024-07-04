@@ -2,26 +2,28 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wordpress Map Embed 1.0.0\n"
+"Project-Id-Version: Map Embed 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-map-embed\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-03T14:00:33+00:00\n"
+"POT-Creation-Date: 2024-07-04T04:45:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wordpress-map-embed\n"
 
 #. Plugin Name of the plugin
 #: wordpress-map-embed.php
-msgid "Wordpress Map Embed"
+#: wordpress-map-embed.php:32
+msgid "Map Embed"
 msgstr ""
 
 #. Description of the plugin
 #: wordpress-map-embed.php
-msgid "Map embed component for Wordpress Gutenberg editor."
+#: wordpress-map-embed.php:33
+msgid "Map embed component."
 msgstr ""
 
 #. Author of the plugin
@@ -29,56 +31,92 @@ msgstr ""
 msgid "Metatavu Oy"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:151
+#: src/edit.js:137
+#: build/index.js:137
 msgid "Settings"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:153
+#: src/edit.js:139
+#: build/index.js:139
 msgid "Embed code"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:157
+#: src/edit.js:145
+#: build/index.js:145
 msgid "URL"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:163
+#: src/edit.js:153
+#: build/index.js:153
 msgid "Show Zoom"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:167
+#: src/edit.js:159
+#: build/index.js:159
 msgid "Show Geolocation"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:171
+#: src/edit.js:168
+#: build/index.js:168
 msgid "Show Fullscreen"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:175
+#: src/edit.js:174
+#: build/index.js:174
 msgid "Show Basemap Selector"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:179
+#: src/edit.js:185
+#: build/index.js:185
 msgid "Full Width"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:185
+#: src/edit.js:193
+#: build/index.js:193
 msgid "Width"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:192
+#: src/edit.js:202
+#: build/index.js:202
 msgid "Height"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:207
+#: src/edit.js:222
+#: build/index.js:222
+msgid "Add an embed code to display a map"
+msgstr ""
+
+#: build/index.js:210
+#: src/edit.js:230
+#: build/index.js:230
+msgid "Provided URL is not valid"
+msgstr ""
+
+#: build/index.js:229
+#: src/edit.js:256
+#: build/index.js:256
 msgid "Embedded Map (click here to edit)"
 msgstr ""
 
 #: build/block.json
+#: src/block.json
 msgctxt "block title"
-msgid "Wordpress Map Embed"
+msgid "Map Embed"
 msgstr ""
 
 #: build/block.json
+#: src/block.json
 msgctxt "block description"
-msgid "Map embed component for Wordpress Gutenberg editor."
+msgid "Map embed component."
 msgstr ""

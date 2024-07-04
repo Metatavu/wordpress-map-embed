@@ -28,6 +28,10 @@ export default function Edit( { attributes, setAttributes } ) {
 	 * @return {string} embed iframe code
 	 */
 	const createEmbedCode = () => {
+		if (!width || !height || !url) {
+			return '';
+		}
+
 		const attrs = [];
 
 		attrs.push( 'width="' + width.replace( /px$/, '' ) + '"' );
@@ -212,8 +216,20 @@ export default function Edit( { attributes, setAttributes } ) {
 	 * @return {Element} The embed iframe
 	 */
 	const renderEmbed = () => {
-		if ( ! validURL ) {
-			return <div>Invalid URL</div>;
+		if (!url) {
+			return (
+				<div>
+					{ __( 'Add an embed code to display a map', 'wordpress-map-embed' ) }
+				</div>
+			);
+		}
+
+		if (!validURL) {
+			return (
+				<div>
+					{ __( 'Provided URL is not valid', 'wordpress-map-embed' ) }
+				</div>
+			);
 		}
 
 		return (

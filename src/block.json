@@ -3,9 +3,9 @@
 	"apiVersion": 3,
 	"name": "create-block/wordpress-map-embed",
 	"version": "1.0.0",
-	"title": "Wordpress Map Embed",
+	"title": "Map Embed",
 	"category": "widgets",
-	"description": "Map embed component for Wordpress Gutenberg editor.",
+	"description": "Map embed component.",
 	"example": {},
 	"attributes": {
 		"width": {
