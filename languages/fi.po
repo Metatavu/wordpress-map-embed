@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Wordpress Map Embed 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-map-"
 "embed\n"
-"POT-Creation-Date: 2024-07-03T13:49:16+00:00\n"
-"PO-Revision-Date: 2024-07-03 16:51+0300\n"
+"POT-Creation-Date: 2024-07-03T14:00:33+00:00\n"
+"PO-Revision-Date: 2024-07-03 17:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -31,56 +31,56 @@ msgstr ""
 msgid "Metatavu Oy"
 msgstr ""
 
-#: build/index.js:148 src/edit.js:133 build/index.js:133
+#: build/index.js:1
 msgid "Settings"
 msgstr "Asetukset"
 
-#: build/index.js:150 src/edit.js:135 build/index.js:135
+#: build/index.js:1
 msgid "Embed code"
 msgstr "Upotuskoodi"
 
-#: build/index.js:154 src/edit.js:141 build/index.js:141
+#: build/index.js:1
 msgid "URL"
 msgstr "Osoite"
 
-#: build/index.js:160 src/edit.js:149 build/index.js:149
+#: build/index.js:1
 msgid "Show Zoom"
 msgstr "Näytä zoomauspainikkeet"
 
-#: build/index.js:164 src/edit.js:155 build/index.js:155
+#: build/index.js:1
 msgid "Show Geolocation"
-msgstr " Näytä oma sijainti"
+msgstr "Näytä oma sijainti"
 
-#: build/index.js:168 src/edit.js:164 build/index.js:164
+#: build/index.js:1
 msgid "Show Fullscreen"
 msgstr "Näytä linkki täyteen karttapalveluun"
 
-#: build/index.js:172 src/edit.js:170 build/index.js:170
+#: build/index.js:1
 msgid "Show Basemap Selector"
 msgstr "Näytä karttanäkymän valinta"
 
-#: build/index.js:176 src/edit.js:181 build/index.js:181
+#: build/index.js:1
 msgid "Full Width"
 msgstr "Käytä sivun leveyttä"
 
-#: build/index.js:182 src/edit.js:189 build/index.js:189
+#: build/index.js:1
 msgid "Width"
 msgstr "Leveys (pikseleinä)"
 
-#: build/index.js:189 src/edit.js:198 build/index.js:198
+#: build/index.js:1
 msgid "Height"
 msgstr "Korkeus (pikseleinä)"
 
-#: build/index.js:223 src/edit.js:240 build/index.js:240
+#: build/index.js:1
 msgid "Embedded Map (click here to edit)"
 msgstr "Karttaupotus (klikkaa tästä muokataksesi)"
 
-#: build/block.json src/block.json
+#: build/block.json
 msgctxt "block title"
 msgid "Wordpress Map Embed"
 msgstr "Karttaupotus"
 
-#: build/block.json src/block.json
+#: build/block.json
 msgctxt "block description"
 msgid "Map embed component for Wordpress Gutenberg editor."
 msgstr "Karttaupotus."

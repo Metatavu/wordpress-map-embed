@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-03T13:49:16+00:00\n"
+"POT-Creation-Date: 2024-07-03T14:00:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wordpress-map-embed\n"
@@ -29,80 +29,56 @@ msgstr ""
 msgid "Metatavu Oy"
 msgstr ""
 
-#: build/index.js:148
-#: src/edit.js:133
-#: build/index.js:133
+#: build/index.js:1
 msgid "Settings"
 msgstr ""
 
-#: build/index.js:150
-#: src/edit.js:135
-#: build/index.js:135
+#: build/index.js:1
 msgid "Embed code"
 msgstr ""
 
-#: build/index.js:154
-#: src/edit.js:141
-#: build/index.js:141
+#: build/index.js:1
 msgid "URL"
 msgstr ""
 
-#: build/index.js:160
-#: src/edit.js:149
-#: build/index.js:149
+#: build/index.js:1
 msgid "Show Zoom"
 msgstr ""
 
-#: build/index.js:164
-#: src/edit.js:155
-#: build/index.js:155
+#: build/index.js:1
 msgid "Show Geolocation"
 msgstr ""
 
-#: build/index.js:168
-#: src/edit.js:164
-#: build/index.js:164
+#: build/index.js:1
 msgid "Show Fullscreen"
 msgstr ""
 
-#: build/index.js:172
-#: src/edit.js:170
-#: build/index.js:170
+#: build/index.js:1
 msgid "Show Basemap Selector"
 msgstr ""
 
-#: build/index.js:176
-#: src/edit.js:181
-#: build/index.js:181
+#: build/index.js:1
 msgid "Full Width"
 msgstr ""
 
-#: build/index.js:182
-#: src/edit.js:189
-#: build/index.js:189
+#: build/index.js:1
 msgid "Width"
 msgstr ""
 
-#: build/index.js:189
-#: src/edit.js:198
-#: build/index.js:198
+#: build/index.js:1
 msgid "Height"
 msgstr ""
 
-#: build/index.js:223
-#: src/edit.js:240
-#: build/index.js:240
+#: build/index.js:1
 msgid "Embedded Map (click here to edit)"
 msgstr ""
 
 #: build/block.json
-#: src/block.json
 msgctxt "block title"
 msgid "Wordpress Map Embed"
 msgstr ""
 
 #: build/block.json
-#: src/block.json
 msgctxt "block description"
 msgid "Map embed component for Wordpress Gutenberg editor."
 msgstr ""
