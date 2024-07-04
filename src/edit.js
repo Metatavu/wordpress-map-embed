@@ -218,7 +218,11 @@ export default function Edit( { attributes, setAttributes } ) {
 	const renderEmbed = () => {
 		if (!url) {
 			return (
-				<div>
+				<div style={{
+					textAlign: 'center',
+					padding: '20px',
+					fontStyle: 'italic'
+				}}>
 					{ __( 'Add an embed code to display a map', 'wordpress-map-embed' ) }
 				</div>
 			);
@@ -226,7 +230,11 @@ export default function Edit( { attributes, setAttributes } ) {
 
 		if (!validURL) {
 			return (
-				<div>
+				<div style={{
+					textAlign: 'center',
+					padding: '20px',
+					fontStyle: 'italic'
+				}}>
 					{ __( 'Provided URL is not valid', 'wordpress-map-embed' ) }
 				</div>
 			);
