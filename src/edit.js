@@ -121,9 +121,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		showZoom,
 		showGeolocation,
 		showFullscreen,
-		showBasemapSelector,
-		setAttributes,
-		url,
+		showBasemapSelector
 	] );
 
 	/**
